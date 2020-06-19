@@ -13,7 +13,7 @@ import React from 'react';
 import {useHistory} from "react-router-dom";
 
 import './Home.css';
-const DUMMY_DATA = [
+export const DUMMY_DATA = [
     {
       id: 'c1', title: 'Ionic = React Course'
     },
@@ -53,11 +53,11 @@ const Courses: React.FC = () => {
                        <IonRow key={course.id}>
                            <IonCol size-md="4" offset-md="4">
                                <IonCard>
-                                   <IonCardContent>
+                                   <IonCardContent className="ion-text-center">
                                        <h2>
                                            {course.title}
                                        </h2>
-                                       <IonButton routerLink={`/course/${course.id}`}>
+                                       <IonButton routerLink={`/courses/${course.id}/goals`}>
                                            See Details
                                        </IonButton>
                                    </IonCardContent>
