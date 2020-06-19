@@ -32,13 +32,15 @@ import CourseGoals from "./pages/CourseGoals";
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
-        {/*<Route path="/home" component={Home} exact={true} />*/}
-        <Route path="/" exact>
-            <Courses></Courses>
-        </Route>
-        <Route path="/course-goals" >
-            <CourseGoals></CourseGoals>
-        </Route>
+        <IonRouterOutlet>
+            {/*<Route path="/home" component={Home} exact={true} />*/}
+            <Route path="/" exact>
+                <Courses></Courses>
+            </Route>
+            <Route path="/course-goals" >
+                <CourseGoals></CourseGoals>
+            </Route>
+        </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>
 );
