@@ -1,7 +1,12 @@
 :root {
   --ion-toolbar-background: var(--ion-color-primary);
+  /*--ion-toolbar-color: var(--ion-color-primary-contrast);*/
+
   --ion-tab-bar-background: var(--ion-color-primary);
-  --ion-toolbar-color: white;
-  --ion-tab-bar-color-selected: white;
-  --ion-tab-bar-color: #403f3f;
+  --ion-tab-bar-color-selected: var(--ion-color-primary-contrast);;
+  /*--ion-tab-bar-color: #403f3f;*/
+}
+
+-ion-back-button {
+  --color: var(--ion-color-primary-contrast)
 }
