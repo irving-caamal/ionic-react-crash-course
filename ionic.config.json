@@ -1,0 +1,7 @@
+{
+  "name": "frirapp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
