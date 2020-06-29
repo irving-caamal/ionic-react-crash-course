@@ -7,7 +7,7 @@ const Filter: React.FC = () => {
             <IonHeader>
                 <IonToolbar>
                     <IonButtons slot="start">
-                        <IonMenuButton></IonMenuButton>
+                        <IonMenuButton />
                     </IonButtons>
                     <IonTitle>
                         Filter
