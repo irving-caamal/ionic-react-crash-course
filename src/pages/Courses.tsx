@@ -1,6 +1,6 @@
 import {
     IonButton, IonCard,
-    IonCardContent, IonCol,
+    IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCol,
     IonContent,
     IonGrid,
     IonHeader,
@@ -53,13 +53,21 @@ const Courses: React.FC = () => {
                        <IonRow key={course.id}>
                            <IonCol size-md="4" offset-md="4">
                                <IonCard>
-                                   <IonCardContent className="ion-text-center">
-                                       <h2>
+                                   <IonCardHeader>
+                                       <IonCardTitle>
                                            {course.title}
-                                       </h2>
-                                       <IonButton routerLink={`/courses/${course.id}/goals`}>
-                                           See Details
-                                       </IonButton>
+                                       </IonCardTitle>
+                                       <IonCardSubtitle>
+                                           {course.title}
+                                       </IonCardSubtitle>
+                                   </IonCardHeader>
+                                   <IonCardContent className="ion-text-center">
+                                       <div className="ion-text-right">
+                                           <IonButton color="secondary" fill="clear" routerLink={`/courses/${course.id}/goals`}>
+                                               See Details
+                                           </IonButton>
+                                       </div>
+
                                    </IonCardContent>
                                </IonCard>
                            </IonCol>
