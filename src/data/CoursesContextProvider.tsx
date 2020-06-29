@@ -39,8 +39,45 @@ const CoursesContextProvider: React.FC = props => {
             return updatedCourses;
         });
     };
-    const deleteGoal = () => {};
-    const updateGoal = () => {};
+    const deleteGoal = (courseId:string,goalId:string) => {
+        setCourses(curCourses => {
+            const updatedCourses = [...curCourses];
+            const updateCourseIndex = updatedCourses.findIndex(
+                (course) =>  {
+                    return course.id === courseId;
+                }
+            )
+            const updatedCourseGoals = updatedCourses[updateCourseIndex].goals.filter(goal => {
+                return goal.id !== goalId
+            })
+            const updatedCourse = {...updatedCourses[updateCourseIndex]}
+            //updatedCourses[updateCourseIndex].goals = updatedCourseGoals;
+            updatedCourse.goals = updatedCourseGoals;
+            updatedCourses[updateCourseIndex] = updatedCourse;
+            return updatedCourses;
+        })
+    };
+    const updateGoal = (courseId:string,goalId:string,newText:string) => {
+        setCourses(curCourses => {
+            const updatedCourses = [...curCourses];
+            const updateCourseIndex = updatedCourses.findIndex(
+                (course) =>  {
+                    return course.id === courseId;
+                }
+            )
+            const updatedCourseGoals = updatedCourses[updateCourseIndex].goals.slice();
+            const updatedCourseGoalsIndex = updatedCourseGoals.findIndex(goal => goal.id === goalId);
+            const updatedGoal = {
+                ...updatedCourseGoals[updateCourseIndex],
+                text:newText
+            }
+            updatedCourseGoals[updatedCourseGoalsIndex] = updatedGoal;
+            const updatedCourse = {...updatedCourses[updateCourseIndex]}
+            updatedCourse.goals = updatedCourseGoals;
+            updatedCourses[updateCourseIndex] = updatedCourse;
+            return updatedCourses;
+        })
+    };
 
     return (
         <CoursesContext.Provider

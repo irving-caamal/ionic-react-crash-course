@@ -35,6 +35,7 @@ const startDeleteGoalHandler = (e:React.MouseEvent) => {
 }
 const deleteGoalHandler = () => {
         setStartDeleting(false)
+    
         setToastMessage('Deleted Goal')
 }
     const startEditGoalHandler = (goalID:string,event: React.MouseEvent) => {
