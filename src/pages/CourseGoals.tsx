@@ -9,7 +9,7 @@ import {
     IonTitle,
     IonToolbar, isPlatform,IonAlert,IonToast,IonModal
 } from '@ionic/react';
-import React, {useState} from 'react';
+import React, {useState,useRef} from 'react';
 import './Home.css';
 import {useParams} from 'react-router-dom';
 import {DUMMY_DATA} from "./Courses";
@@ -17,12 +17,12 @@ import {add, addOutline, create, pencil, trash} from "ionicons/icons";
 import EditModal from "../components/EditModal";
 
 const CourseGoals: React.FC = () => {
-
-
     const [startDeleting,setStartDeleting]=useState(false);
     const [isEditing,setIsEditing]=useState(false);
     const [toastMessage,setToastMessage]=useState('');
     const selectedCourseID = useParams<{id:string}>().id;
+
+    const slidingOptionsRef = useRef<HTMLIonItemSlidingElement>(null);
 
     const selectedCourse = DUMMY_DATA.find(course => course.id === selectedCourseID)
     const [selectedGoal,setSelectedGoal]= useState<any>();
@@ -40,7 +40,7 @@ const deleteGoalHandler = () => {
             return g.id == goalID;
         });
 
-
+        slidingOptionsRef.current?.closeOpened();
         if(!goal) {
             return;
         }
@@ -106,7 +106,7 @@ const deleteGoalHandler = () => {
                   <IonList>
                       {selectedCourse?.goals.map(goal => {
                           return (
-                              <IonItemSliding key={goal.id}>
+                              <IonItemSliding key={goal.id} ref={slidingOptionsRef}>
                                   <IonItemOptions side="start" >
                                       <IonItemOption onClick={startDeleteGoalHandler} color="danger">
                                           <IonIcon icon={trash} slot="icon-only"/>
