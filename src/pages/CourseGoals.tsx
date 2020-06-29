@@ -3,20 +3,23 @@ import {
     IonButtons,
     IonContent, IonFab, IonFabButton,
     IonHeader, IonIcon,
-    IonItem, IonItemOption, IonItemOptions, IonItemSliding, IonLabel,
     IonList,
     IonPage,
     IonTitle,
-    IonToolbar, isPlatform,IonAlert,IonToast,IonModal
+    IonToolbar, isPlatform,IonAlert,IonToast
 } from '@ionic/react';
-import React, {useState,useRef} from 'react';
 import './Home.css';
+import {addOutline} from "ionicons/icons";
+
+import React, {useState,useRef, useContext} from 'react';
+
 import {useParams} from 'react-router-dom';
-import {DUMMY_DATA} from "./Courses";
-import {add, addOutline, create, pencil, trash} from "ionicons/icons";
 import EditModal from "../components/EditModal";
 import EditableGoalItem from "../components/EditableGoalItem";
+import CoursesContext from '../data/coursesContext'
+
 const CourseGoals: React.FC = () => {
+    const coursesCtx = useContext(CoursesContext);
     const [startDeleting,setStartDeleting]=useState(false);
     const [isEditing,setIsEditing]=useState(false);
     const [toastMessage,setToastMessage]=useState('');
@@ -24,7 +27,7 @@ const CourseGoals: React.FC = () => {
 
     const slidingOptionsRef = useRef<HTMLIonItemSlidingElement>(null);
 
-    const selectedCourse = DUMMY_DATA.find(course => course.id === selectedCourseID)
+    const selectedCourse = coursesCtx.courses.find(course => course.id === selectedCourseID)
     const [selectedGoal,setSelectedGoal]= useState<any>();
 
 const startDeleteGoalHandler = (e:React.MouseEvent) => {
@@ -58,9 +61,18 @@ const deleteGoalHandler = () => {
         setIsEditing(true);
         setSelectedGoal(null)
     }
+    const addGoalHandler = (text:string) => {
+        coursesCtx.addGoal(selectedCourseID,text);
+        setIsEditing(false);
+    }
   return (
       <React.Fragment>
-          <EditModal show={isEditing} onCancel={cancelEditGoalHandler} editedGoal={selectedGoal}/>
+          <EditModal
+              show={isEditing}
+             onCancel={cancelEditGoalHandler}
+             onSave={addGoalHandler}
+             editedGoal={selectedGoal}
+          />
           <IonToast isOpen={!!toastMessage} message={toastMessage} duration={2000} onDidDismiss={() => {
               setToastMessage('')
           }}/>

@@ -1,5 +1,5 @@
 import React, {useState}  from 'react';
-import CoursesContext, {Course} from './coursesContext'
+import CoursesContext, {Course, Goal} from './coursesContext'
 
 const CoursesContextProvider: React.FC = props => {
     const [courses,setCourses ]= useState<Course[]>([
@@ -22,7 +22,23 @@ const CoursesContextProvider: React.FC = props => {
             return curCourses.concat(newCourse)
         })
     };
-    const addGoal = () => {};
+    const addGoal = (courseId:string, text:string) => {
+        const newGoal: Goal = {id:Math.random().toString(),text:text}
+        setCourses(courses => {
+            const updatedCourses = [...courses];
+            const updateCourseIndex = updatedCourses.findIndex(
+                (course) =>  {
+                    return course.id === courseId;
+                }
+            )
+            const updatedCourseGoals = updatedCourses[updateCourseIndex].goals.concat(newGoal)
+            const updatedCourse = {...updatedCourses[updateCourseIndex]}
+            //updatedCourses[updateCourseIndex].goals = updatedCourseGoals;
+            updatedCourse.goals = updatedCourseGoals;
+            updatedCourses[updateCourseIndex] = updatedCourse;
+            return updatedCourses;
+        });
+    };
     const deleteGoal = () => {};
     const updateGoal = () => {};
 
