@@ -30,28 +30,26 @@ import './theme/custom.css'
 /**
  * App Pages
  */
-import Courses from "./pages/Courses";
-import CourseGoals from "./pages/CourseGoals";
-import AllGoals from "./pages/AllGoals";
-
-import {home, list, options, trophy} from "ionicons/icons";
 import Filter from "./pages/Filter";
 import CourseTabs from "./pages/CourseTabs";
 import SideDrawer from "./components/SideDrawer";
+import CoursesContextProvider from "./data/CoursesContextProvider";
 
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
         <SideDrawer />
-        <IonRouterOutlet id="main">
-            <Route path="/filter" exact>
-                <Filter />
-            </Route>
-            <Route path="/courses">
-                <CourseTabs />
-            </Route>
-            <Redirect to="/courses" />
-        </IonRouterOutlet>
+        <CoursesContextProvider>
+            <IonRouterOutlet id="main">
+                <Route path="/filter" exact>
+                    <Filter />
+                </Route>
+                <Route path="/courses">
+                    <CourseTabs />
+                </Route>
+                <Redirect to="/courses" />
+            </IonRouterOutlet>
+        </CoursesContextProvider>
     </IonReactRouter>
   </IonApp>
 );
