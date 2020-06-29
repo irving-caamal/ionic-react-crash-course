@@ -18,6 +18,7 @@ import './Home.css';
 
 import AddCourseModal from "../components/AddCourseModal";
 import {addOutline} from "ionicons/icons";
+import CourseItem from "../components/CourseItem";
 
 export const DUMMY_DATA = [
     {
@@ -108,28 +109,7 @@ const Courses: React.FC = () => {
                             return (
                                 <IonRow key={course.id}>
                                     <IonCol size-md="4" offset-md="4">
-                                        <IonCard>
-                                            <IonCardHeader>
-                                                <IonCardTitle>
-                                                    {course.title}
-                                                </IonCardTitle>
-                                                <IonCardSubtitle>
-                                                    Enrolled on {course.enrolled.toLocaleDateString('es-MX', {
-                                                    year:'numeric',
-                                                    month:'2-digit',
-                                                    day:'2-digit'
-                                                })}
-                                                </IonCardSubtitle>
-                                            </IonCardHeader>
-                                            <IonCardContent className="ion-text-center">
-                                                <div className="ion-text-right">
-                                                    <IonButton color="secondary" fill="clear" routerLink={`/courses/${course.id}`}>
-                                                        See Details
-                                                    </IonButton>
-                                                </div>
-
-                                            </IonCardContent>
-                                        </IonCard>
+                                        <CourseItem title={course.title} enrolmentDate={course.enrolled} id={course.id}/>
                                     </IonCol>
                                 </IonRow>
                             )
