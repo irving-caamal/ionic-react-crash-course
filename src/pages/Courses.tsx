@@ -80,10 +80,13 @@ const Courses: React.FC = () => {
     const cancelAddCourseHandler = () => {
         setIsAdding(false);
     }
+    const courseAddHandler= (title: string , date: Date) => {
+        console.log('adding')
+    }
 
   return (
     <React.Fragment>
-        <AddCourseModal show={isAdding} onCancel={cancelAddCourseHandler}/>
+        <AddCourseModal show={isAdding} onCancel={cancelAddCourseHandler} onSave={courseAddHandler}/>
         <IonPage>
             <IonHeader>
                 <IonToolbar>

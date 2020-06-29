@@ -16,6 +16,7 @@ import {save} from "ionicons/icons";
 const AddCourseModal : React.FC <{
     show:boolean;
     onCancel: ()=> void;
+    onSave: (title:string,date: Date) => void
 }> = props =>{
     const [error,setError] = useState('');
     const titleRef = useRef<HTMLIonInputElement>(null);
@@ -38,6 +39,7 @@ const AddCourseModal : React.FC <{
         }
 
         setError('')
+        props.onSave(enteredTitle.toString(),new Date(selectedDate));
     }
 
     return (
