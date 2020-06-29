@@ -13,7 +13,7 @@ export interface Course {
 
 interface Context {
     courses:  Course[],
-    addCourse: () => void
+    addCourse: (courseTitle:string,courseDate:Date) => void
     addGoal: () => void
     updateGoal: () => void
     deleteGoal: () => void

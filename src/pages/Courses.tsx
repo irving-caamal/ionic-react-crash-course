@@ -9,7 +9,7 @@ import {
     IonTitle,
     IonToolbar, isPlatform
 } from '@ionic/react';
-import React ,{useState} from 'react';
+import React ,{useState, useContext} from 'react';
 import {useHistory} from "react-router-dom";
 
 import './Home.css';
@@ -19,6 +19,8 @@ import './Home.css';
 import AddCourseModal from "../components/AddCourseModal";
 import {addOutline} from "ionicons/icons";
 import CourseItem from "../components/CourseItem";
+
+import CoursesContext from '../data/coursesContext';
 
 export const DUMMY_DATA = [
     {
@@ -65,6 +67,7 @@ export const DUMMY_DATA = [
     },
 ];
 const Courses: React.FC = () => {
+    const coursesCtx = useContext(CoursesContext);
     const [isAdding,setIsAdding]=useState(false);
     /**
      * */
@@ -81,7 +84,7 @@ const Courses: React.FC = () => {
         setIsAdding(false);
     }
     const courseAddHandler= (title: string , date: Date) => {
-        console.log('adding')
+        coursesCtx.addCourse(title,date)
     }
 
   return (
@@ -108,7 +111,7 @@ const Courses: React.FC = () => {
                 </IonHeader>
                 <IonContent>
                     <IonGrid>
-                        {DUMMY_DATA.map(course => {
+                        {coursesCtx.courses.map(course => {
                             return (
                                 <IonRow key={course.id}>
                                     <IonCol size-md="4" offset-md="4">

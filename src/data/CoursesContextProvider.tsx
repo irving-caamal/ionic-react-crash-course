@@ -3,7 +3,18 @@ import CoursesContext, {Course} from './coursesContext'
 
 const CoursesContextProvider: React.FC = props => {
     const [courses,setCourses ]= useState<Course[]>([]);
-    const addCourse = () => {};
+    const addCourse = (title:string,date:Date) => {
+        const newCourse: Course = {
+            id: new Date().toString(),
+            title,
+            enrolled: date,
+            goals: []
+        }
+
+        setCourses(curCourses => {
+            return curCourses.concat(newCourse)
+        })
+    };
     const addGoal = () => {};
     const deleteGoal = () => {};
     const updateGoal = () => {};
