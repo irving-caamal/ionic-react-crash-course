@@ -1,4 +1,4 @@
-import {IonButton, IonContent, IonHeader, IonPage, IonTitle, IonToolbar} from '@ionic/react';
+import {IonButton, IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar} from '@ionic/react';
 import React from 'react';
 import {useHistory} from "react-router-dom";
 
@@ -17,6 +17,9 @@ const AllGoals: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
+            <IonButtons slot="start">
+                <IonMenuButton></IonMenuButton>
+            </IonButtons>
           <IonTitle>All Goals</IonTitle>
         </IonToolbar>
       </IonHeader>

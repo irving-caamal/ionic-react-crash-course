@@ -1,6 +1,16 @@
 import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
-import {IonApp, IonIcon, IonLabel, IonRouterOutlet, IonTabBar, IonTabButton, IonTabs} from '@ionic/react';
+import {
+    IonApp, IonContent, IonHeader,
+    IonIcon, IonItem,
+    IonLabel, IonList,
+    IonMenu, IonMenuToggle,
+    IonRouterOutlet,
+    IonTabBar,
+    IonTabButton,
+    IonTabs, IonTitle,
+    IonToolbar
+} from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import Home from './pages/Home';
 
@@ -31,13 +41,44 @@ import Courses from "./pages/Courses";
 import CourseGoals from "./pages/CourseGoals";
 import AllGoals from "./pages/AllGoals";
 
-import {home, list, trophy} from "ionicons/icons";
+import {home, list, options, trophy} from "ionicons/icons";
+import Filter from "./pages/Filter";
 
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
+        <IonMenu contentId="main">
+
+            <IonHeader>
+                <IonToolbar>
+                    <IonTitle>
+                        Course Goals
+                    </IonTitle>
+                </IonToolbar>
+            </IonHeader>
+            <IonContent>
+                <IonList>
+                    <IonMenuToggle>
+                        <IonItem button routerLink='/all-goals'>
+                            <IonIcon slot="start" icon={list}></IonIcon>
+                            <IonLabel>All goals</IonLabel>
+                        </IonItem>
+                    </IonMenuToggle>
+                    <IonMenuToggle>
+                        <IonItem button routerLink='/filter'>
+                            <IonIcon slot="start" icon={options}></IonIcon>
+                            <IonLabel>Filter</IonLabel>
+                        </IonItem>
+                    </IonMenuToggle>
+
+                </IonList>
+            </IonContent>
+        </IonMenu>
         <IonTabs>
-            <IonRouterOutlet>
+            <IonRouterOutlet id="main">
+                <Route path='/filter' exact>
+                    <Filter />
+                </Route>
                 {/*<Route path="/home" component={Home} exact={true} />*/}
                 <Route path="/courses" exact>
                     <Courses></Courses>
