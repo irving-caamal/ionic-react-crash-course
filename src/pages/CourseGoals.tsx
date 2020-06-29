@@ -7,7 +7,7 @@ import {
     IonList,
     IonPage,
     IonTitle,
-    IonToolbar, isPlatform,IonAlert,IonToast
+    IonToolbar, isPlatform,IonAlert,IonToast,IonModal
 } from '@ionic/react';
 import React, {useState} from 'react';
 import './Home.css';
@@ -19,6 +19,7 @@ import {add, addOutline, create, pencil, trash} from "ionicons/icons";
 const CourseGoals: React.FC = () => {
 
     const [startDeleting,setStartDeleting]=useState(false);
+    const [isEditing,setIsEditing]=useState(false);
     const [toastMessage,setToastMessage]=useState('');
     const selectedCourseID = useParams<{id:string}>().id;
     const selectedCourse = DUMMY_DATA.find(course => course.id === selectedCourseID)
@@ -32,15 +33,33 @@ const deleteGoalHandler = () => {
 }
     const startEditGoalHandler = (e:React.MouseEvent) => {
         e.stopPropagation();
-        console.log('edited')
+        setIsEditing(true);
+    }
+    const cancelEditGoalHandler = () => {
+        setIsEditing(false);
     }
 
     const startAddGoalHandler = (e:React.MouseEvent) => {
-        e.stopPropagation();
-        console.log('add')
+        setIsEditing(true);
     }
   return (
       <React.Fragment>
+          <IonModal isOpen={isEditing}>
+              <IonHeader>
+                  <IonToolbar>
+                      <IonTitle>
+                          Edit Goal
+                      </IonTitle>
+                  </IonToolbar>
+              </IonHeader>
+              <IonContent>
+                  <p>
+                      Editing...
+                  </p>
+                  <IonButton onClick={cancelEditGoalHandler}>Cancel</IonButton>
+                  <IonButton>Save</IonButton>
+              </IonContent>
+          </IonModal>
           <IonToast isOpen={!!toastMessage} message={toastMessage} duration={2000} onDidDismiss={() => {
               setToastMessage('')
           }}/>
