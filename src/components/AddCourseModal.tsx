@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {
     IonButton,
     IonCol,
-    IonContent,
+    IonContent, IonDatetime,
     IonGrid,
     IonHeader,
     IonInput, IonItem, IonLabel,
@@ -36,12 +36,20 @@ const AddCourseModal : React.FC <{
                           </IonItem>
                       </IonCol>
                   </IonRow>
+                  <IonRow>
+                      <IonCol>
+                          <IonItem>
+                              <IonLabel >Enrollement Date</IonLabel>
+                              <IonDatetime displayFormat="MM DD YY" min="2018-06-04"/>
+                          </IonItem>
+                      </IonCol>
+                  </IonRow>
                   <IonRow >
                       <IonCol>
                          <IonButton color="dark" fill="clear" onClick={props.onCancel}>Cancel</IonButton>
                       </IonCol>
                       <IonCol>
-                          <IonButton color="secondary">Add </IonButton>
+                          <IonButton color="secondary" expand="block">Save </IonButton>
                       </IonCol>
                   </IonRow>
               </IonGrid>
