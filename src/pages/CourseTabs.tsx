@@ -20,7 +20,7 @@ const CourseTabs: React.FC= () => {
                 <Route path="/courses/all-goals" exact>
                     <AllGoals />
                 </Route>
-                <Route path="/courses/:courseId">
+                <Route path="/courses/:id">
                     <CourseGoals />
                 </Route>
 

@@ -1,4 +1,14 @@
-import {IonBackButton, IonButtons, IonContent, IonHeader, IonPage, IonTitle, IonToolbar} from '@ionic/react';
+import {
+    IonBackButton,
+    IonButtons,
+    IonContent,
+    IonHeader,
+    IonItem, IonLabel,
+    IonList,
+    IonPage,
+    IonTitle,
+    IonToolbar
+} from '@ionic/react';
 import React from 'react';
 import './Home.css';
 import {useParams} from 'react-router-dom';
@@ -22,11 +32,17 @@ const CourseGoals: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Course Goals</IonTitle>
-          </IonToolbar>
-        </IonHeader>
+          {selectedCourse &&
+          <IonList>
+              {selectedCourse?.goals.map(goal => {
+                  return (
+                      <IonItem key={goal.id} lines="full">
+                          <IonLabel>{goal.text}</IonLabel>
+                      </IonItem>
+                  )
+              })}
+          </IonList>
+          }
       </IonContent>
     </IonPage>
   );

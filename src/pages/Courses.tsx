@@ -15,13 +15,46 @@ import {useHistory} from "react-router-dom";
 import './Home.css';
 export const DUMMY_DATA = [
     {
-      id: 'c1', title: 'Ionic = React Course'
+      id: 'c1', title: 'Ionic = React Course',
+        enrolled : new Date('03/22/2019'),
+        goals:[
+            {
+                id: 'c1g1',
+                text: 'Finish the course'
+            },
+            {
+                id: 'c1g2',
+                text: 'Learn a lot of the course'
+            },
+        ]
     },
     {
-        id: 'c2', title: 'Ionic = Angular Course'
+        id: 'c2', title: 'Ionic = Angular Course',
+        enrolled : new Date('07/22/2019'),
+        goals:[
+            {
+                id: 'c2g1',
+                text: 'Finish the course'
+            },
+            {
+                id: 'c2g2',
+                text: 'Learn a lot of the course'
+            },
+        ]
     },
     {
-        id: 'c3', title: 'Ionic = Vue Course'
+        id: 'c3', title: 'Ionic = Vue Course',
+        enrolled : new Date('09/22/2019'),
+        goals:[
+            {
+                id: 'c3g1',
+                text: 'Finish the course'
+            },
+            {
+                id: 'c3g2',
+                text: 'Learn a lot of the course'
+            },
+        ]
     },
 ];
 const Courses: React.FC = () => {
@@ -58,12 +91,16 @@ const Courses: React.FC = () => {
                                            {course.title}
                                        </IonCardTitle>
                                        <IonCardSubtitle>
-                                           {course.title}
+                                           Enrolled on {course.enrolled.toLocaleDateString('es-MX', {
+                                               year:'numeric',
+                                           month:'2-digit',
+                                           day:'2-digit'
+                                           })}
                                        </IonCardSubtitle>
                                    </IonCardHeader>
                                    <IonCardContent className="ion-text-center">
                                        <div className="ion-text-right">
-                                           <IonButton color="secondary" fill="clear" routerLink={`/courses/${course.id}/goals`}>
+                                           <IonButton color="secondary" fill="clear" routerLink={`/courses/${course.id}`}>
                                                See Details
                                            </IonButton>
                                        </div>
