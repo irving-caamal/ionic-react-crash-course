@@ -2,10 +2,17 @@ import React, {useState}  from 'react';
 import CoursesContext, {Course} from './coursesContext'
 
 const CoursesContextProvider: React.FC = props => {
-    const [courses,setCourses ]= useState<Course[]>([]);
+    const [courses,setCourses ]= useState<Course[]>([
+        {
+            id: 'c1',
+            title: ' React the complete guide',
+            enrolled: new Date(),
+            goals: []
+        }
+    ]);
     const addCourse = (title:string,date:Date) => {
         const newCourse: Course = {
-            id: new Date().toString(),
+            id: Math.random().toString(),
             title,
             enrolled: date,
             goals: []

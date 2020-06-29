@@ -85,6 +85,7 @@ const Courses: React.FC = () => {
     }
     const courseAddHandler= (title: string , date: Date) => {
         coursesCtx.addCourse(title,date)
+        setIsAdding(false)
     }
 
   return (
