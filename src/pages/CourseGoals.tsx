@@ -7,7 +7,7 @@ import {
     IonList,
     IonPage,
     IonTitle,
-    IonToolbar, isPlatform,IonAlert
+    IonToolbar, isPlatform,IonAlert,IonToast
 } from '@ionic/react';
 import React, {useState} from 'react';
 import './Home.css';
@@ -19,6 +19,7 @@ import {add, addOutline, create, pencil, trash} from "ionicons/icons";
 const CourseGoals: React.FC = () => {
 
     const [startDeleting,setStartDeleting]=useState(false);
+    const [toastMessage,setToastMessage]=useState('');
     const selectedCourseID = useParams<{id:string}>().id;
     const selectedCourse = DUMMY_DATA.find(course => course.id === selectedCourseID)
 
@@ -27,7 +28,7 @@ const startDeleteGoalHandler = (e:React.MouseEvent) => {
 }
 const deleteGoalHandler = () => {
         setStartDeleting(false)
-        console.log('deleting...')
+        setToastMessage('Deleted Goal')
 }
     const startEditGoalHandler = (e:React.MouseEvent) => {
         e.stopPropagation();
@@ -40,6 +41,9 @@ const deleteGoalHandler = () => {
     }
   return (
       <React.Fragment>
+          <IonToast isOpen={!!toastMessage} message={toastMessage} duration={2000} onDidDismiss={() => {
+              setToastMessage('')
+          }}/>
           <IonAlert
               isOpen={startDeleting}
               header="Are you sure?"
