@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import {
     IonButtons,
     IonContent,
@@ -10,10 +10,13 @@ import {
     IonTitle, IonToggle,
     IonToolbar
 } from "@ionic/react";
-import {DUMMY_DATA} from './Courses';
+import CoursesContext from '../data/coursesContext';
+
 const Filter: React.FC = () => {
+    const coursesCtx = useContext(CoursesContext);
     const courseFilterChangeHandler = (event:CustomEvent) => {
-        console.log(event)
+
+        coursesCtx.changeCourseFilter(event.detail.value, event.detail.checked);
     }
     return (
         <IonPage>
@@ -29,13 +32,17 @@ const Filter: React.FC = () => {
             </IonHeader>
             <IonContent>
                 <IonList>
-                    {DUMMY_DATA.map(course=> {
+                    {coursesCtx.courses.map(course=> {
                         return (
                             <IonItem key={course.id}>
                                 <IonLabel>
                                     {course.title}
                                 </IonLabel>
-                                <IonToggle value={course.id} onIonChange={courseFilterChangeHandler}></IonToggle>
+                                <IonToggle
+                                    value={course.id}
+                                    onIonChange={courseFilterChangeHandler}
+                                    checked={course.included}
+                                />
                             </IonItem>
                         )
                     })}

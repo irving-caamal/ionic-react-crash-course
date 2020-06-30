@@ -21,7 +21,10 @@ const AllGoals: React.FC = () => {
 
     const coursesCtx = useContext(CourseContext);
 
-    const goals = coursesCtx.courses.map(course => {
+    const goals = coursesCtx.courses.filter(course =>  {
+        return course.included
+    })
+        .map(course => {
         return course.goals.map(goal => {
             return {
                 ...goal,
