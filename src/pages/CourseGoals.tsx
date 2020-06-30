@@ -25,19 +25,28 @@ const CourseGoals: React.FC = () => {
     const [toastMessage,setToastMessage]=useState('');
     const selectedCourseID = useParams<{id:string}>().id;
 
+    //Refs
     const slidingOptionsRef = useRef<HTMLIonItemSlidingElement>(null);
+    const selectedGoalIdRef = useRef<string | null>(null);
 
     const selectedCourse = coursesCtx.courses.find(course => course.id === selectedCourseID)
     const [selectedGoal,setSelectedGoal]= useState<any>();
 
-const startDeleteGoalHandler = (e:React.MouseEvent) => {
-        setStartDeleting(true)
-}
-const deleteGoalHandler = () => {
-        setStartDeleting(false)
-    
-        setToastMessage('Deleted Goal')
-}
+    const startDeleteGoalHandler = (goalId:string,e:React.MouseEvent) => {
+            setStartDeleting(true)
+        selectedGoalIdRef.current = goalId;
+    }
+
+    const deleteGoalHandler = () => {
+            setStartDeleting(false)
+            coursesCtx.deleteGoal(selectedCourseID,selectedGoalIdRef.current!);
+            setToastMessage('Deleted Goal')
+    }
+    /**
+     *
+     * @param goalID
+     * @param event
+     */
     const startEditGoalHandler = (goalID:string,event: React.MouseEvent) => {
         event.stopPropagation();
         let goal = selectedCourse?.goals.find(g => {
@@ -53,6 +62,9 @@ const deleteGoalHandler = () => {
         setSelectedGoal(goal);
 
     }
+    /**
+     *
+     */
     const cancelEditGoalHandler = () => {
         setIsEditing(false);
         setSelectedGoal(null);
@@ -62,8 +74,17 @@ const deleteGoalHandler = () => {
         setIsEditing(true);
         setSelectedGoal(null)
     }
+    /**
+     *
+     * @param text
+     */
     const addGoalHandler = (text:string) => {
-        coursesCtx.addGoal(selectedCourseID,text);
+        if(selectedGoal) {
+            coursesCtx.updateGoal(selectedCourseID,selectedGoal.id,text)
+        }else{
+            coursesCtx.addGoal(selectedCourseID, text);
+
+        }
         setIsEditing(false);
     }
   return (
@@ -123,7 +144,7 @@ const deleteGoalHandler = () => {
                                   key={goal.id}
                                   slidingRef={slidingOptionsRef}
                                   text={goal.text}
-                                  onStartDelete={startDeleteGoalHandler}
+                                  onStartDelete={startDeleteGoalHandler.bind(null,goal.id)}
                                   onStartEdit={startEditGoalHandler.bind(null,goal.id)}
                               />
                           )
