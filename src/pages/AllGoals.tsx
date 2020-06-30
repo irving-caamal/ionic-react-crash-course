@@ -61,20 +61,25 @@ const AllGoals: React.FC = () => {
           </IonToolbar>
         </IonHeader>
         <IonContent>
-            <IonList>
-                {goals.map(goal => (
-                    <IonItem key={goal.id}>
-                        <IonLabel>
-                            <h2>
-                                {goal.courseTitle}
-                            </h2>
-                            <h3 color="secondary">
-                                {goal.text}
-                            </h3>
-                        </IonLabel>
-                    </IonItem>
-                ))}
-            </IonList>
+            {goals.length === 0 && <h2>
+                No goals found :(
+            </h2>}
+            {goals.length > 0 && (
+                <IonList>
+                    {goals.map(goal => (
+                        <IonItem key={goal.id}>
+                            <IonLabel>
+                                <h2>
+                                    {goal.courseTitle}
+                                </h2>
+                                <h3 color="secondary">
+                                    {goal.text}
+                                </h3>
+                            </IonLabel>
+                        </IonItem>
+                    ))}
+                </IonList>
+            )}
         </IonContent>
       </IonContent>
     </IonPage>
