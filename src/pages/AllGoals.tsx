@@ -9,15 +9,19 @@ import {
     IonTitle,
     IonToolbar
 } from '@ionic/react';
-import React from 'react';
+import React , {useContext} from 'react';
 import {useHistory} from "react-router-dom";
 
 import './Home.css';
 
 import {DUMMY_DATA} from './Courses'
+import CourseContext from '../data/coursesContext';
+
 const AllGoals: React.FC = () => {
 
-    const goals = DUMMY_DATA.map(course => {
+    const coursesCtx = useContext(CourseContext);
+
+    const goals = coursesCtx.courses.map(course => {
         return course.goals.map(goal => {
             return {
                 ...goal,

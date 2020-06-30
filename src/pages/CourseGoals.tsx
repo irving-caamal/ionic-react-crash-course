@@ -33,6 +33,7 @@ const CourseGoals: React.FC = () => {
     const [selectedGoal,setSelectedGoal]= useState<any>();
 
     const startDeleteGoalHandler = (goalId:string,e:React.MouseEvent) => {
+        setToastMessage('');
             setStartDeleting(true)
         selectedGoalIdRef.current = goalId;
     }
@@ -95,9 +96,7 @@ const CourseGoals: React.FC = () => {
              onSave={addGoalHandler}
              editedGoal={selectedGoal}
           />
-          <IonToast isOpen={!!toastMessage} message={toastMessage} duration={2000} onDidDismiss={() => {
-              setToastMessage('')
-          }}/>
+          <IonToast isOpen={!!toastMessage} message={toastMessage} duration={2000}/>
           <IonAlert
               isOpen={startDeleting}
               header="Are you sure?"
